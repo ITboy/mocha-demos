@@ -1,0 +1,29 @@
+{
+  "name": "mocha-demos",
+  "version": "0.0.1",
+  "description": "notes wrote during mocha practice",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ITboy/mocha-demos.git"
+  },
+  "keywords": [
+    "mocha",
+    "demo",
+    "practice",
+    "example"
+  ],
+  "author": "prepper",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ITboy/mocha-demos/issues"
+  },
+  "homepage": "https://github.com/ITboy/mocha-demos#readme",
+  "dependencies": {
+    "mocha": "^3.4.2",
+    "mongodb": "^2.2.27"
+  }
+}

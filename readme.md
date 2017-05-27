@@ -30,6 +30,10 @@
 
 #### unexpect
     可扩展的BDD断言工具包
-    
+
 #### chai
     expect, assert和should都支持
+
+### 异步测试
+  支持异步很简单，只需要在it方法里接受mocha传递的done参数，并在异步操作完成时，调用done方法，
+  如果成功，不传递任何值，如果失败，传递error
