@@ -163,6 +163,20 @@
 
 ### case的持续时间
   当case的执行时间过长的时候，mocha会在report中显示出来，可以对每个case设置他的持续时间为多少是合理的，超过就会在report中标识为slow.
+
+  ```
+  Array
+    #indexOf()
+      - should return -1 when the value is not present
+
+  slow case
+    ✓ resolved after 3 secs <font color='red'>(3000ms)</font>
+
+
+  1 passing (3s)
+  1 pending
+
+  ```
 ### case的超时时间
   由于case的执行是串行，为了增强Mocha的可用性，mocha对case采用了超时机制，如果某个case异步的时间过长，mocha就会终止他的执行，开始执行后面的case。
 
