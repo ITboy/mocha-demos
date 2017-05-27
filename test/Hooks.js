@@ -8,7 +8,7 @@ chai.should();
 
 const mongoUrl = 'mongodb://127.0.0.1:27017/mydb';
 
-describe.only('hooks', function () {
+describe('hooks', function () {
   let dbInfo = {};
   let index = 0;
   before('before hook', function(done) {
