@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/ITboy/mocha-demos#readme",
   "dependencies": {
+    "chai": "^2.1.2",
+    "chai-as-promised": "^6.0.0",
     "mocha": "^3.4.2",
     "mongodb": "^2.2.27"
   }

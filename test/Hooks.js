@@ -1,9 +1,14 @@
 const assert = require('assert');
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
 const MongoClient = require('mongodb').MongoClient;
+
+chai.use(chaiAsPromised);
+chai.should();
 
 const mongoUrl = 'mongodb://127.0.0.1:27017/mydb';
 
-describe('hooks', function () {
+describe.only('hooks', function () {
   let dbInfo = {};
   let index = 0;
   before('before hook', function(done) {
@@ -17,56 +22,40 @@ describe('hooks', function () {
     });
   });
 
-  beforeEach('before each', function(done) {
+  beforeEach('before each', function() {
     index += 1;
-    dbInfo.db.collection('user').insert({ name: 'prepper', 'email': 'prepper@126.com', index: index }
-    , function(err, result) {
-      done(err);
+    return dbInfo.db.collection('user')
+    .insert({ name: 'prepper', 'email': 'prepper@126.com', index: index })
+    .should.be.fulfilled;
+  });
+
+  it('find user', function() {
+    return dbInfo.db.collection('user')
+    .findOne({}, { fields: { _id: 0 } })
+    .should.eventually.deep.equal({
+      name: 'prepper',
+      email: 'prepper@126.com',
+      index: 1,
     });
   });
 
-  it('find user', function(done) {
-    dbInfo.db.collection('user').findOne({}, { fields: { _id: 0 } }, function(err, user) {
-      if (err) {
-        done(err);
-        return;
-      } else {
-        try {
-          assert.deepEqual(user, { name: 'prepper', 'email': 'prepper@126.com', 'index': 1 });
-        } catch(e) {
-          done(e);
-          return;
-        }
-        done();
-      }
-    });
-  });
-
-  it('update user', function(done) {
-    dbInfo.db.collection('user')
+  it('update user', function() {
+    return dbInfo.db.collection('user')
     .updateOne({}, { $set: { name: 'gjj' } })
-    .then(function() {
-      dbInfo.db.collection('user').findOne({}, { fields: { _id: 0 } }, function(err, user) {
-      if (err) {
-        done(err);
-        return;
-      } else {
-        try {
-          assert.deepEqual(user, { name: 'gjj', 'email': 'prepper@126.com', 'index': 2 });
-        } catch(e) {
-          done(e);
-          return;
-        }
-        done();
-      }
-    });
+    .then(() =>
+      dbInfo.db.collection('user')
+      .findOne({}, { fields: { _id: 0 } }))
+    .should.eventually.deep.equal({
+      name: 'gjj',
+      email: 'prepper@126.com',
+      index: 2,
     });
   });
 
-  afterEach('after each', function(done) {
-    dbInfo.db.collection('user').deleteOne({}, {}, function(err) {
-      done(err);
-    });
+  afterEach('after each', function() {
+    return dbInfo.db.collection('user')
+    .deleteOne({}, {})
+    .should.eventually.fulfilled;
   });
 
   after('after hook', function() {
