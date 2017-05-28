@@ -15,7 +15,7 @@
   * [异步hook](#异步hook)
   * [根hook](#根hook)
   * [延迟执行case](#延迟执行case)
-  * [pending test](#pending test)
+  * [pending测试](#pending测试)
   * [白名单，只执行某些case](#白名单，只执行某些case)
   * [黑名单，跳过某些case](#黑名单，跳过某些case)
   * [test重试](#test重试)
