@@ -66,10 +66,10 @@
 
 ### 根hook
   当在最外层（不在任何describe之内）定义hook时，认为这些hook是根hook，此时任何test case，即使test case与当前根hook不在一个文件之内，也会受影响（假如这个hook是beforeEach)。
-  但这种根hook只能使用同步操作，因为他不在一个suite内，没人给他传递done方法，也没办法return一个promise，但是如果有这种需求可参考[延迟执行case](#延迟执行case)。
+  但这种根hook只能使用同步操作，因为他不在一个suite内，没人给他传递done方法，也没办法return一个promise，但是如果有这种需求可参考[延迟执行case](# 延迟执行case)。
 
 ### 延迟执行case
-  如果你想在跑所有的case之前，做一些异步操作，首先想到的是使用[根hook](根hook)，但在[根hook](根hook)节已经解释无法支持。
+  如果你想在跑所有的case之前，做一些异步操作，首先想到的是使用[根hook](# 根hook)，但在[根hook](# 根hook)节已经解释无法支持。
   mocha允许你执行异步操作，而在任何时刻调用run来通知mocha开始执行test suite，这里的run跟在test suite传递的done功能一模一样，但需要注意，在执行mocha命令时必须指定--delay以通知mocha先不执行test suite，在适当的时候，内部代码会开始test suite。
 
   ```js
@@ -170,13 +170,14 @@
       - should return -1 when the value is not present
 
   slow case
-    ✓ resolved after 3 secs <font color='red'>(3000ms)</font>
+    ✓ resolved after 3 secs (3000ms)
 
 
   1 passing (3s)
   1 pending
 
   ```
+  实际中，(3000ms)是红色加亮的。
 ### case的超时时间
   由于case的执行是串行，为了增强Mocha的可用性，mocha对case采用了超时机制，如果某个case异步的时间过长，mocha就会终止他的执行，开始执行后面的case。
 
